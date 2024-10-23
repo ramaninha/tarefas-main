@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Tarefa from "../Tarefa";
+import Tarefa from "../Tarefa/index";
 
 function ListaDeTarefas() {
   const [tarefas, setTarefas] = useState([]);
@@ -39,6 +39,14 @@ function ListaDeTarefas() {
     buscarDados();
   }, []);
 
+  function onCompletaChange(tarefaId, novacompleta) {
+    setTarefas(
+      tarefas.map((tarefa) =>
+        tarefa.id === tarefaId ? { ...tarefa, completed: novacompleta}:tarefa
+      )
+    );
+  }
+
   return (
     <div style={{ padding: "20px" }}>
       {usuarios.map((usuario) => {
@@ -58,7 +66,7 @@ function ListaDeTarefas() {
               <h3>Tarefas Incompletas</h3>
               <div style={{ backgroundColor: "red", padding: "10px", color: "white" }}>
                 {incompletas.map((tarefa) => (
-                  <Tarefa key={tarefa.id} tarefa={tarefa} nomeUsuario={usuario.name} />
+                  <Tarefa key={tarefa.id} tarefa={tarefa} nomeUsuario={usuario.name} onCompletaChange={onCompletaChange} />
                 ))}
               </div>
             </div>
