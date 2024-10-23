@@ -10,7 +10,6 @@ function Tarefa(props) {
 
   const handleClick = () =>{
     const newCompleta = !props.tarefa.completed;
-    //use a callback function to update the value of completa//
     console.log(props)
     props.onCompletaChange(props.tarefa.id, newCompleta);
   }
